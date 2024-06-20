@@ -1,4 +1,4 @@
-Demo of [FATROP](https://github.com/meco-group/fatrop) interface to CasADi
+Demo of [FATROP](https://github.com/meco-group/fatrop) interface to CasADi, avaiolable on Youtube: https://youtu.be/X-nS4i8jJyM?si=jREgZii_Rzj_Ob9u
 ![slide](https://github.com/jgillis/fatrop_demo/assets/329032/69787881-484b-497d-adb1-e135439ae5ae)
 
 * Will be shipped with 3.6.6 onwards

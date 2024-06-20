@@ -31,7 +31,7 @@ sys["ode"] = ode*dt # Time scaling
 
 intg = ca.integrator('intg','rk',sys,0,1,{"simplify":True, "number_of_finite_elements": 4})
 
-F = ca.Function('F',[x,u,dt],[intg(x0=x,u=u,p=dt)["xf"]])
+F = ca.Function('F',[x,u,dt],[intg(x0=x,u=u,p=dt)["xf"]],["x","u","dt"],["xnext"])
 
 nx = x.numel()
 nu = u.numel()
@@ -107,9 +107,9 @@ if solver=='fatrop':
     options["debug"] = True
 
     # (codegen of helper functions)
-    options["jit"] = True
-    options["jit_temp_suffix"] = False
-    options["jit_options"] = {"flags": ["-O3"],"compiler": "ccache gcc"}
+    #options["jit"] = True
+    #options["jit_temp_suffix"] = False
+    #options["jit_options"] = {"flags": ["-O3"],"compiler": "ccache gcc"}
 
 if solver=="ipopt":
     pass
@@ -119,20 +119,3 @@ opti.solver(solver,options)
 sol = opti.solve()
 
 print(sol.value(X).T)
-
-#opti.solver('fatrop',{"expand":True,"structure_detection":"auto","debug":True})
-
-
-
-#F = opti.to_function('F',[],[X])
-#F.generate('F.c')
-#F = opti.to_function('F',[],[X],{"jit":True,"jit_temp_suffix":False,"jit_options":{"flags": ["-O3","-I"+ca.GlobalOptions.getCasadiIncludePath(),"-l"+"blasfeo","-l"+"fatrop"],"linker_flags":["-l"+"blasfeo","-l"+"fatrop","-L"+ca.GlobalOptions.getCasadiPath()],"compiler": "ccache gcc","verbose":True}, "print_time":True})
-
-#print("her we go")
-#F()
-
-
-
-
-#ca.jacobian_sparsity(opti.g,opti.x).spy()
-

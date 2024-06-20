@@ -32,13 +32,12 @@ sys["ode"] = ode*dt # Time scaling
 intg = ca.integrator('intg','rk',sys,0,1,{"simplify":True, "number_of_finite_elements": 4})
 
 F = ca.Function('F',[x,u,dt],[intg(x0=x,u=u,p=dt)["xf"]],["x","u","dt"],["xnext"])
-print(F)
+
 
 nx = x.numel()
 nu = u.numel()
 
 opti = ca.Opti()
-
 
 N = 20
 T0 = 10
@@ -86,7 +85,6 @@ X = ca.hcat(X)
 opti.minimize(ca.sumsqr(X[0,:])+T)
 
 opti.solver('ipopt',{"expand":True})
-#opti.solver('fatrop',{"expand":True, "debug":True, "structure_detection": "auto"})
 
 sol = opti.solve()
 

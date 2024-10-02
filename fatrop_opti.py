@@ -94,27 +94,18 @@ T = ca.hcat(T)
 opti.minimize(ca.sumsqr(X[0,:])+ca.sum2(T))
 
 
-#opti.solver('ipopt',{"expand":True})
-
-solver = 'fatrop'
-
 options = {}
 options["expand"] = True
+options["fatrop"] = {"mu_init": 0.1}
+options["structure_detection"] = "auto"
+options["debug"] = True
 
-if solver=='fatrop':
-    options["fatrop"] = {"mu_init": 0.1}
-    options["structure_detection"] = "auto"
-    options["debug"] = True
+# (codegen of helper functions)
+#options["jit"] = True
+#options["jit_temp_suffix"] = False
+#options["jit_options"] = {"flags": ["-O3"],"compiler": "ccache gcc"}
 
-    # (codegen of helper functions)
-    #options["jit"] = True
-    #options["jit_temp_suffix"] = False
-    #options["jit_options"] = {"flags": ["-O3"],"compiler": "ccache gcc"}
-
-if solver=="ipopt":
-    pass
-
-opti.solver(solver,options)
+opti.solver("fatrop",options)
 
 sol = opti.solve()
 

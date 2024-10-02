@@ -1,8 +1,7 @@
 Demo of [FATROP](https://github.com/meco-group/fatrop) interface to CasADi
 ![slide](https://github.com/jgillis/fatrop_demo/assets/329032/69787881-484b-497d-adb1-e135439ae5ae)
 
-* Will be shipped with 3.6.6 onwards
-* If not released yet: [check nightly builds](https://github.com/casadi/casadi/releases/tag/nightly-main)
+* Shipped with CasADi 3.6.7
 * Available in Matlab
 * Compatible with CasADi Codegen
 
